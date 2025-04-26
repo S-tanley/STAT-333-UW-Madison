@@ -1,0 +1,77 @@
+---
+title: "modeling"
+author: "Stanley Zheng"
+date: "2025-04-15"
+output: html_document
+---
+
+```{r}
+example_data = read.csv("data/example_data_2003-04.csv", header = TRUE, stringsAsFactors = FALSE)
+mydf_2005_2009 <- read.csv("data/5y/2005-2009_NBA_data.csv", header = TRUE, stringsAsFactors = FALSE)
+mydf_2010_2014 <- read.csv("data/5y/2010-2014_NBA_data.csv", header = TRUE, stringsAsFactors = FALSE)
+mydf_2015_2019 <- read.csv("data/5y/2015-2019_NBA_data.csv", header = TRUE, stringsAsFactors = FALSE)
+mydf_2020_2024 <- read.csv("data/5y/2020-2024_NBA_data.csv", header = TRUE, stringsAsFactors = FALSE)
+```
+
+```{r}
+head(mydf_2005_2009)
+```
+```{r}
+jpeg("img/3P shooting percent.jpg", width = 3000, height = 1500, res = 300)
+par(mfrow = c(1, 2), mar = c(5, 4, 7, 2))
+
+hist(mydf_2005_2009$X3P.,
+     main = "3 Point Shooting Percent in 2005-2009",
+     xlab = "3P%",
+     ylab = "Frequency",
+     col = "lightblue",
+     border = "black")
+
+hist(mydf_2020_2024$X3P.,
+     main = "3 Point Ahooting Percent in 2020-2024",
+     xlab = "3P%",
+     ylab = "Frequency",
+     col = "lightblue",
+     border = "black")
+
+dev.off()
+```
+```{r}
+jpeg("img/3 point attempt rate.jpg", width = 3000, height = 1500, res = 300)
+par(mfrow = c(1, 2))
+
+hist(mydf_2005_2009$X3P_ratio,
+     main = "3 point attempt rate in 2005-2009",
+     xlab = "3P_ratio",
+     ylab = "Frequency",
+     col = "lightblue",
+     border = "black")
+
+hist(mydf_2020_2024$X3P_ratio,
+     main = "3 point attempt rate in 2020-2024",
+     xlab = "3P_ratio",
+     ylab = "Frequency",
+     col = "lightblue",
+     border = "black")
+
+dev.off()
+```
+
+
+```{r}
+model_2005_2009 <- lm(WinRate ~ X3P. + X2P. + X3P_ratio + X2P_ratio, data = mydf_2005_2009)
+summary(model_2005_2009)
+```
+```{r}
+model_2020_2024 <- lm(WinRate ~ X3P. + X2P. + X3P_ratio + X2P_ratio, data = mydf_2020_2024)
+summary(model_2020_2024)
+```
+```{r}
+A = as.matrix(c(3.22,4.2,1.6,1.49))
+
+res = A %*% t(A)
+
+diag(res) = 0
+sum(res)/2
+```
+
