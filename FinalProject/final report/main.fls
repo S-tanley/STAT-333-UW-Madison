@@ -907,6 +907,11 @@ INPUT ./figure/P-value Trends Over Time.jpg
 INPUT figure/P-value Trends Over Time.jpg
 INPUT ./figure/P-value Trends Over Time.jpg
 INPUT ./figure/P-value Trends Over Time.jpg
+INPUT ./figure/diagnostic_plots_mydf_2005_2009.png
+INPUT ./figure/diagnostic_plots_mydf_2005_2009.png
+INPUT figure/diagnostic_plots_mydf_2005_2009.png
+INPUT ./figure/diagnostic_plots_mydf_2005_2009.png
+INPUT ./figure/diagnostic_plots_mydf_2005_2009.png
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/vf/public/xcharter/XCharter1-Roman-ts1.vf
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/tfm/public/xcharter/XCharter1-Roman-ts1--base.tfm
 INPUT /usr/local/texlive/2022/texmf-dist/fonts/vf/public/xcharter/XCharter-Bold-tlf-t1.vf

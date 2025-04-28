@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex main"] 1745801738 "main.aux" "main.bbl" "main" 1745801760
+["bibtex main"] 1745803236 "main.aux" "main.bbl" "main" 1745803335
   "/usr/local/texlive/2022/texmf-dist/bibtex/bst/harvard/apsr.bst" 1136766823 25357 c990a86d1a60aa9370f76a9507b609ec ""
   "literature.bib" 1745645592 255 3790af6da05e875daba0c7b5b3a83621 ""
-  "main.aux" 1745801760 2417 077ef849d8c2626c7d0b22a2a94d98d9 "pdflatex"
+  "main.aux" 1745803334 2607 b191e9d9e01fac9dae59986eef85f63f "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1745801758 "/Users/zhengbowen/Library/CloudStorage/OneDrive-UW-Madison/UW-Madison/Junior/Spring/STAT 333/Final Project/final report/main.tex" "main.pdf" "main" 1745801760
-  "/Users/zhengbowen/Library/CloudStorage/OneDrive-UW-Madison/UW-Madison/Junior/Spring/STAT 333/Final Project/final report/main.tex" 1745801758 23450 b7adac002679a9052ac3cc3b09092d36 ""
+["pdflatex"] 1745803333 "/Users/zhengbowen/Library/CloudStorage/OneDrive-UW-Madison/UW-Madison/Junior/Spring/STAT 333/Final Project/final report/main.tex" "main.pdf" "main" 1745803335
+  "/Users/zhengbowen/Library/CloudStorage/OneDrive-UW-Madison/UW-Madison/Junior/Spring/STAT 333/Final Project/final report/main.tex" 1745803333 24417 11ab95631a468a9861e540c6a2600c7e ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/xcharter/xch1_co4ru4.enc" 1645915288 4020 60b792d80020bd18b20705eb9657af3d ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/xcharter/xch_rydp4l.enc" 1645915288 3163 21e525d33df21a14ca1957bee2a40288 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -199,12 +199,13 @@
   "figure/3P shooting percent.jpg" 1745710526 234121 cf4c5f3fdfdea76132e85f101fc4610b ""
   "figure/Coefficients Over Time by Variable.jpg" 1745801439 214005 0dd2607f474353843c59529c828de42c ""
   "figure/P-value Trends Over Time.jpg" 1745801439 310356 c0cc360858b232de12a1d7a94e6efb41 ""
+  "figure/diagnostic_plots_mydf_2005_2009.png" 1745802515 365860 d913076c6c5432082d9423ff00dec907 ""
   "figure/model0_2005_2009.png" 1745796497 48742 ed4fb86de11091e7b6705ff4d4d59158 ""
   "figure/model0_2020_2024.png" 1745796521 48376 22af27d96423cefa23ba82b3397e634d ""
   "figure/original_data.png" 1745685026 335287 8e23e3ef26b89f5c44800fb81c033104 ""
-  "main.aux" 1745801760 2417 077ef849d8c2626c7d0b22a2a94d98d9 "pdflatex"
-  "main.bbl" 1745801738 51 644c51d86f43488906f29305195f1859 "bibtex main"
-  "main.tex" 1745801758 23450 b7adac002679a9052ac3cc3b09092d36 ""
+  "main.aux" 1745803334 2607 b191e9d9e01fac9dae59986eef85f63f "pdflatex"
+  "main.bbl" 1745803236 51 644c51d86f43488906f29305195f1859 "bibtex main"
+  "main.tex" 1745803333 24417 11ab95631a468a9861e540c6a2600c7e ""
   (generated)
   "main.aux"
   "main.log"

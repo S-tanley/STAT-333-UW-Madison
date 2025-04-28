@@ -325,7 +325,17 @@ and the Figure \ref{fig:coefficients_comparison}.
 \end{figure}
 
 \subsection{Model Diagnostic}
-
+For our parsimonious linear regression models, which is actually our first type of model. We conducted standard model diagnostic checks using residual 
+plots. The Residuals vs Fitted plot shows no strong patterns, supporting the linearity assumption. The Q-Q plot indicates that residuals are 
+approximately normally distributed. The Scale-Location plot suggests constant variance of residuals. Finally, the Residuals vs Leverage plot does not 
+show any extreme influential observations. Overall, the diagnostics suggest that our model is appropriate for inference. You can see the diagnostic plots 
+in Figure \ref{fig:diagnostic_plots}, this is the polt for the period 2005-2009. For different periods, the diagnostic plots are similar.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figure/diagnostic_plots_mydf_2005_2009.png}
+    \caption{Comparison of Marginal Effects Between Periods.}
+    \label{fig:diagnostic_plots}
+\end{figure}
 
 
 %----------------------------------------------------------------------------------------
