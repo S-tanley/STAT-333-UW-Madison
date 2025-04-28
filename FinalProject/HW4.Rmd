@@ -1,0 +1,27 @@
+---
+title: "HW4"
+author: "Stanley Zheng"
+date: "2025-04-14"
+output: html_document
+---
+We use python to collect and tidy up our data, and the whole data and the preprocess code is in this 
+repo(https://github.com/S-tanley/STAT-333-UW-Madison). The original date scource is https://www.nba.com, 
+and we use nba_api(https://github.com/swar/nba_api) to get the data from it. Here I directly read the csv file we generated.
+```{r}
+mydf <- read.csv("data/1y/2004_NBA_data.csv", header = TRUE, stringsAsFactors = FALSE)
+head(mydf, 20)
+```
+Explanation of Returned Variables:
+
+| Variable      | Description                        | Formula                                      |
+|---------------|------------------------------------|----------------------------------------------|
+| `TEAM_NAME`   | Team name                          | e.g., "Lakers", "Celtics"                    |
+| `WinRate`     | Win rate                           | `W / GP`: wins divided by games played       |
+| `3P%`         | Three-point field goal percentage  | `FG3M / FG3A`                                |
+| `2P%`         | Two-point field goal percentage    | `(FGM - FG3M) / (FGA - FG3A)`                |
+| `3P_ratio`    | Proportion of 3-point attempts     | `FG3A / FGA`                                 |
+| `2P_ratio`    | Proportion of 2-point attempts     | `(FGA - FG3A) / FGA`                         |
+
+This function helps prepare the dataset for analyzing how different shooting strategies relate to team performance across seasons.
+
+We also have other data, if you want know more, you can go to our repo.
