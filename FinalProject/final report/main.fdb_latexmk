@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex main"] 1745687283 "main.aux" "main.bbl" "main" 1745687330
+["bibtex main"] 1745801738 "main.aux" "main.bbl" "main" 1745801760
   "/usr/local/texlive/2022/texmf-dist/bibtex/bst/harvard/apsr.bst" 1136766823 25357 c990a86d1a60aa9370f76a9507b609ec ""
   "literature.bib" 1745645592 255 3790af6da05e875daba0c7b5b3a83621 ""
-  "main.aux" 1745687330 1370 391fe1e4d6cd092e200faac0395d7dad "pdflatex"
+  "main.aux" 1745801760 2417 077ef849d8c2626c7d0b22a2a94d98d9 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1745687329 "/Users/zhengbowen/Library/CloudStorage/OneDrive-UW-Madison/UW-Madison/Junior/Spring/STAT 333/Final Project/final report/main.tex" "main.pdf" "main" 1745687330
-  "/Users/zhengbowen/Library/CloudStorage/OneDrive-UW-Madison/UW-Madison/Junior/Spring/STAT 333/Final Project/final report/main.tex" 1745687329 14936 3de25921b3221541a7f0a8ec6cbf5db1 ""
+["pdflatex"] 1745801758 "/Users/zhengbowen/Library/CloudStorage/OneDrive-UW-Madison/UW-Madison/Junior/Spring/STAT 333/Final Project/final report/main.tex" "main.pdf" "main" 1745801760
+  "/Users/zhengbowen/Library/CloudStorage/OneDrive-UW-Madison/UW-Madison/Junior/Spring/STAT 333/Final Project/final report/main.tex" 1745801758 23450 b7adac002679a9052ac3cc3b09092d36 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/xcharter/xch1_co4ru4.enc" 1645915288 4020 60b792d80020bd18b20705eb9657af3d ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/xcharter/xch_rydp4l.enc" 1645915288 3163 21e525d33df21a14ca1957bee2a40288 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -22,6 +22,7 @@
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm" 1246382020 940 75ac932a52f80982a9f8ea75d03a34cf ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm" 1246382020 940 228d6584342e91276bf566bcf9716b83 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmex10.tfm" 1136768653 992 662f679a0b3d2d53c1b94050fdaa3f50 ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm" 1136768653 1528 abec98dbc43e172678c11b3b9031252a ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1136768653 1524 4414a8315f39513458b80dfc63bff03a ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm" 1136768653 1512 f21f83efb36853c0b70002322c1ab3ad ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm" 1136768653 1520 eccf95517727cb11801f4f1aee3a21b4 ""
@@ -42,6 +43,11 @@
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/xcharter/XCharter-Roman-tlf-t1.tfm" 1605217437 24988 2d55b201ed6b321a86283faf51d0c581 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/xcharter/XCharter1-Roman-ts1--base.tfm" 1645915288 1524 e88e985840aae645568dcf70e1f711ba ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/xcharter/XCharter1-Roman-ts1.tfm" 1645915288 1552 98696c2cd23c445b5368a400e0dc81a9 ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1248133631 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold.pfb" 1645915288 235843 332512fa752b4d481c5492e7f97b71d0 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman.pfb" 1645915288 235932 01dc1bf5f1322c4e6fb764364b9d96e7 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/vf/public/xcharter/XCharter-Bold-tlf-t1.vf" 1605217437 1732 83f20a67ec207787eeb6c08fca2e3d60 ""
@@ -189,10 +195,16 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1677846184 2826438 b4e489bed3d68e67fb7aa9ebc4dd6b12 ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
+  "figure/3 point attempt rate.jpg" 1745710567 243181 8508ebe262debaec46b0334bf82765be ""
+  "figure/3P shooting percent.jpg" 1745710526 234121 cf4c5f3fdfdea76132e85f101fc4610b ""
+  "figure/Coefficients Over Time by Variable.jpg" 1745801439 214005 0dd2607f474353843c59529c828de42c ""
+  "figure/P-value Trends Over Time.jpg" 1745801439 310356 c0cc360858b232de12a1d7a94e6efb41 ""
+  "figure/model0_2005_2009.png" 1745796497 48742 ed4fb86de11091e7b6705ff4d4d59158 ""
+  "figure/model0_2020_2024.png" 1745796521 48376 22af27d96423cefa23ba82b3397e634d ""
   "figure/original_data.png" 1745685026 335287 8e23e3ef26b89f5c44800fb81c033104 ""
-  "main.aux" 1745687330 1370 391fe1e4d6cd092e200faac0395d7dad "pdflatex"
-  "main.bbl" 1745687283 51 644c51d86f43488906f29305195f1859 "bibtex main"
-  "main.tex" 1745687329 14936 3de25921b3221541a7f0a8ec6cbf5db1 ""
+  "main.aux" 1745801760 2417 077ef849d8c2626c7d0b22a2a94d98d9 "pdflatex"
+  "main.bbl" 1745801738 51 644c51d86f43488906f29305195f1859 "bibtex main"
+  "main.tex" 1745801758 23450 b7adac002679a9052ac3cc3b09092d36 ""
   (generated)
   "main.aux"
   "main.log"
