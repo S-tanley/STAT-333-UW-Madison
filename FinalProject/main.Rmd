@@ -59,19 +59,26 @@ dev.off()
 
 
 ```{r}
-model_2005_2009 <- lm(WinRate ~ X3P. + X2P. + X3P_ratio + X2P_ratio, data = mydf_2005_2009)
+model_2005_2009 <- lm(WinRate ~ X3P. + X2P. + X3P_ratio, data = mydf_2005_2009)
 summary(model_2005_2009)
-```
-```{r}
-model_2020_2024 <- lm(WinRate ~ X3P. + X2P. + X3P_ratio + X2P_ratio, data = mydf_2020_2024)
+model_2020_2024 <- lm(WinRate ~ X3P. + X2P. + X3P_ratio, data = mydf_2020_2024)
 summary(model_2020_2024)
 ```
+
 ```{r}
-A = as.matrix(c(3.22,4.2,1.6,1.49))
+model_2010_2014 <- lm(WinRate ~ X3P. + X2P. + X3P_ratio, data = mydf_2010_2014)
+summary(model_2010_2014)
+model_2015_2019 <- lm(WinRate ~ X3P. + X2P. + X3P_ratio, data = mydf_2015_2019)
+summary(model_2015_2019)
+```
+```{r}
+head(mydf_2005_2009)
+```
 
-res = A %*% t(A)
 
-diag(res) = 0
-sum(res)/2
+```{r}
+mydf_2005_2009_confounder <- mydf_2005_2009[, !(names(mydf_2005_2009) %in% c("X", "TEAM_ID", "TEAM_NAME", "FG_PCT", "X2P_ratio"))]
+model_2015_2019_confounder0 <- lm(WinRate ~ ., data = mydf_2005_2009_confounder)
+summary(model_2015_2019_confounder0)
 ```
 
