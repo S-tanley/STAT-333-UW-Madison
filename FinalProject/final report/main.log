@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.3)  27 APR 2025 20:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.3)  28 APR 2025 13:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -751,15 +751,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [4 <./figure/3P shooting percent.jpg> <./figure/3 point attempt rate.jpg>]
+LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
+(Font)              scaled to size 10.95pt on input line 257.
 <figure/model0_2005_2009.png, id=26, 550.055pt x 347.2975pt>
 File: figure/model0_2005_2009.png Graphic file (type png)
 <use figure/model0_2005_2009.png>
-Package pdftex.def Info: figure/model0_2005_2009.png  used on input line 276.
+Package pdftex.def Info: figure/model0_2005_2009.png  used on input line 277.
 (pdftex.def)             Requested size: 212.54073pt x 134.19482pt.
 <figure/model0_2020_2024.png, id=27, 550.055pt x 347.2975pt>
 File: figure/model0_2020_2024.png Graphic file (type png)
 <use figure/model0_2020_2024.png>
-Package pdftex.def Info: figure/model0_2020_2024.png  used on input line 277.
+Package pdftex.def Info: figure/model0_2020_2024.png  used on input line 278.
 (pdftex.def)             Requested size: 212.54073pt x 134.19482pt.
 
 
@@ -771,24 +773,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [5 <./figure/model0_2005_2009.png> <./figure/model0_2020_2024.png>]
 LaTeX Font Info:    Font shape `TS1/XCharter-TLF/m/n' will be
-(Font)              scaled to size 10.95pt on input line 289.
-LaTeX Font Info:    Font shape `T1/XCharter-TLF/b/n' will be
-(Font)              scaled to size 10.95pt on input line 307.
+(Font)              scaled to size 10.95pt on input line 290.
 <figure/Coefficients Over Time by Variable.jpg, id=38, 3011.25pt x 1505.625pt>
 File: figure/Coefficients Over Time by Variable.jpg Graphic file (type jpg)
 <use figure/Coefficients Over Time by Variable.jpg>
-Package pdftex.def Info: figure/Coefficients Over Time by Variable.jpg  used on input line 321.
+Package pdftex.def Info: figure/Coefficients Over Time by Variable.jpg  used on input line 322.
 (pdftex.def)             Requested size: 212.54073pt x 106.25455pt.
 <figure/P-value Trends Over Time.jpg, id=39, 3011.25pt x 1505.625pt>
 File: figure/P-value Trends Over Time.jpg Graphic file (type jpg)
 <use figure/P-value Trends Over Time.jpg>
-Package pdftex.def Info: figure/P-value Trends Over Time.jpg  used on input line 322.
+Package pdftex.def Info: figure/P-value Trends Over Time.jpg  used on input line 323.
 (pdftex.def)             Requested size: 212.54073pt x 106.25455pt.
-<figure/diagnostic_plots_mydf_2005_2009.png, id=40, 2007.5pt x 1405.25pt>
-File: figure/diagnostic_plots_mydf_2005_2009.png Graphic file (type png)
-<use figure/diagnostic_plots_mydf_2005_2009.png>
-Package pdftex.def Info: figure/diagnostic_plots_mydf_2005_2009.png  used on input line 335.
-(pdftex.def)             Requested size: 425.08147pt x 297.55563pt.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -798,6 +793,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [6 <./figure/Coefficients Over Time by Variable.jpg> <./figure/P-value Trends Over Time.jpg>]
+<figure/interative model.png, id=43, 1130.2225pt x 921.4425pt>
+File: figure/interative model.png Graphic file (type png)
+<use figure/interative model.png>
+Package pdftex.def Info: figure/interative model.png  used on input line 338.
+(pdftex.def)             Requested size: 377.85419pt x 308.0419pt.
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 13.59999pt, for example:
@@ -805,7 +806,33 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[7 <./figure/diagnostic_plots_mydf_2005_2009.png>] (./main.bbl
+[7 <./figure/interative model.png>]
+<figure/diagnostic_plots_mydf_2005_2009.png, id=49, 2007.5pt x 1405.25pt>
+File: figure/diagnostic_plots_mydf_2005_2009.png Graphic file (type png)
+<use figure/diagnostic_plots_mydf_2005_2009.png>
+Package pdftex.def Info: figure/diagnostic_plots_mydf_2005_2009.png  used on input line 364.
+(pdftex.def)             Requested size: 425.08147pt x 297.55563pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[8 <./figure/diagnostic_plots_mydf_2005_2009.png>]
+Overfull \hbox (2.64667pt too wide) in paragraph at lines 384--390
+[]\T1/XCharter-TLF/m/n/10.95 These find-ings pro-vide quan-ti-ta-tive ev-i-dence of a struc-tural shift in NBA strat-egy to-ward perimeter-
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[9] (./main.bbl
 
 Package natbib Warning: Empty `thebibliography' environment on input line 3.
 
@@ -827,18 +854,18 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [1] (./main.aux) ) 
 Here is how much of TeX's memory you used:
- 19725 strings out of 478268
- 416200 string characters out of 5846348
- 735008 words of memory out of 5000000
- 37502 multiletter control sequences out of 15000+600000
+ 19733 strings out of 478268
+ 416427 string characters out of 5846348
+ 734018 words of memory out of 5000000
+ 37509 multiletter control sequences out of 15000+600000
  557520 words of font info for 88 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 100i,11n,104p,1143b,345s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 100i,12n,104p,1143b,345s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/xcharter/xch_rydp4l.enc}{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/xcharter/xch1_co4ru4.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on main.pdf (9 pages, 1711851 bytes).
+Output written on main.pdf (11 pages, 1821004 bytes).
 PDF statistics:
- 90 PDF objects out of 1000 (max. 8388607)
- 51 compressed objects within 1 object stream
+ 98 PDF objects out of 1000 (max. 8388607)
+ 55 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 53 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 58 words of extra memory for PDF output out of 10000 (max. 10000000)
 

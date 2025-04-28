@@ -100,7 +100,9 @@ df <- data.frame(
 # 把宽格式变成长格式
 df_long <- pivot_longer(df, cols = c(Coef_3P, Coef_2P),
                         names_to = "Variable", values_to = "Coefficient")
+
 jpeg("img/Coefficients Over Time by Variable.jpg", width = 3000, height = 1500, res = 300)
+
 # 折线图
 ggplot(df_long, aes(x = Period, y = Coefficient, color = Variable, group = Variable)) +
   geom_line(size = 1.2) +
@@ -113,5 +115,75 @@ ggplot(df_long, aes(x = Period, y = Coefficient, color = Variable, group = Varia
   ) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))  # 让x轴标签斜着排防止重叠
+
+dev.off()
+```
+
+```{r}
+library(scales)
+
+# 你的新数据
+df_sig <- data.frame(
+  Period = c("2005-2009", "2010-2014", "2015-2019", "2020-2024"),
+  Pvalue_3P = c(0.00381, 4.09e-6, 1.13e-9, 5.58e-14),
+  Pvalue_2P = c(3.11e-8, 1.64e-12, 1.51e-9, 1.65e-6)
+)
+
+# 转成长格式
+df_sig_long <- pivot_longer(df_sig, cols = c(Pvalue_3P, Pvalue_2P),
+                             names_to = "Variable", values_to = "Pvalue")
+
+jpeg("img/P-value Trends Over Time.jpg", width = 3000, height = 1500, res = 300)
+
+# 画图
+ggplot(df_sig_long, aes(x = Period, y = Pvalue, color = Variable, group = Variable)) +
+  geom_line(size = 1.2) +
+  geom_point(size = 3) +
+  scale_y_continuous(
+    trans = trans_new("reversed_log10", 
+                      transform = function(x) -log10(x), 
+                      inverse = function(x) 10^(-x)),
+    breaks = 10^(-15:0),
+    labels = trans_format("log10", math_format(10^.x))
+  ) +
+  labs(
+    title = "P-value Trends Over Time",
+    x = "Period",
+    y = "P-value (log scale, reversed)",
+    color = "Variable"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+dev.off()
+```
+```{r}
+png("img/diagnostic_plots_mydf_2005_2009.png", width = 2000, height = 1400, res = 300)  # 高度拉大一点
+par(mfrow = c(2, 2))  # 先把画布分成2行2列
+plot(model_2005_2009, mar = c(6, 5, 5, 4))
+dev.off()
+```
+```{r}
+png("img/diagnostic_plots_model_2020_2024.png", width = 2000, height = 1400, res = 300)  # 高度拉大一点
+par(mfrow = c(2, 2))  # 先把画布分成2行2列
+plot(model_2020_2024, mar = c(6, 5, 5, 4))
+dev.off()
+```
+```{r}
+# 添加年代标签
+mydf_2005_2009$Era <- 0
+mydf_2020_2024$Era <- 1
+
+# 合并数据
+data_all <- rbind(mydf_2005_2009, mydf_2020_2024)
+
+# WinRate ~ X3P. + X2P. + X3P_ratio
+# 建立带交互项的线性回归模型
+model <- lm(WinRate ~ X3P. + X2P. + X3P_ratio + Era +
+              X3P.:Era + X2P.:Era + X3P_ratio:Era,
+            data = data_all)
+
+# 打印回归结果
+summary(model)
 ```
 

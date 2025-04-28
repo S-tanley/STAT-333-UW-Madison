@@ -254,6 +254,7 @@ central analysis: evaluating whether and how the growing emphasis on three-point
 
 \section{Model}
 \subsection{Model Specification}
+\subsubsection{Parsimonious Linear Regression}
 To examine how the relationship between shooting efficiency and team success has evolved over time, we first fit a parsimonious linear 
 regression model in each era, using team win rate (WinRate) as the dependent variable. The explanatory variables included three-point 
 field goal percentage (3P\%), two-point field goal percentage (2P\%), and three-point attempt rate (3P\_ratio). 
@@ -324,28 +325,67 @@ and the Figure \ref{fig:coefficients_comparison}.
     \label{fig:coefficients_comparison}
 \end{figure}
 
+\subsubsection{Interaction Model}
+To capture the evolving relationship between shooting metrics and team success over time, we fit an interactive linear regression model 
+incorporating both main effects and interaction terms with era. The model is specified as:
+\begin{align*}
+    \text{WinRate} =\ & \beta_0 + \beta_1 \text{3P\%} + \beta_2 \text{2P\%} + \beta_3 \text{3P\_ratio} + \beta_4 \text{2P\_ratio} + \beta_5 \text{Era} + \beta_6 (\text{3P\%} \times \text{Era}) \\
+    &+ \beta_7 (\text{2P\%} \times \text{Era}) + \beta_8 (\text{3P\_ratio} \times \text{Era}) + \beta_9 (\text{2P\_ratio} \times \text{Era}) + \epsilon.
+\end{align*}
+Our model summary is shown in Figure \ref{fig:model1}.
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figure/interative model.png}
+    \caption{Interaction Model.}
+    \label{fig:model1}
+\end{figure}
+
+The regression results reveal important structural changes between eras. When fitting separate models for the earlier and modern periods, 
+we observed that the marginal effect of three-point shooting on win rate increased over time, while the effect of two-point shooting declined. 
+The interactive model formally confirms these trends and provides statistical evidence that the changes are significant.
+
+In the earlier period (Era = 0), both three-point percentage (3P\%) and two-point percentage (2P\%) positively predict win rate. A 1 
+percentage point increase in two-point shooting percentage is associated with a 3.74\% increase in win rate, compared to a 1.88\% increase 
+for three-point shooting. In the modern period (Era = 1), the marginal effect of three-point shooting strengthens by an additional 2.88 
+points ($p < 0.001$), while the effect of two-point shooting decreases by approximately 1.56 points ($p = 0.0415$). 
+
+Notably, the three-point attempt rate remains statistically insignificant across periods, suggesting that merely increasing shot volume 
+without efficiency improvements does not translate into greater success. Additionally, the direct effect of era itself is not significant, 
+indicating that improvements in win rate are mediated primarily through changes in shooting efficiency.
+
+Together, the period-specific models and the interactive model provide consistent and reinforcing evidence of a structural shift in the NBA. 
+In the modern era, three-point efficiency has overtaken two-point efficiency as the more critical determinant of team success, reflecting 
+the league’s broader transition toward a perimeter-oriented ``small ball'' strategy.
+
+
 \subsection{Model Diagnostic}
-For our parsimonious linear regression models, which is actually our first type of model. We conducted standard model diagnostic checks using residual 
-plots. The Residuals vs Fitted plot shows no strong patterns, supporting the linearity assumption. The Q-Q plot indicates that residuals are 
-approximately normally distributed. The Scale-Location plot suggests constant variance of residuals. Finally, the Residuals vs Leverage plot does not 
-show any extreme influential observations. Overall, the diagnostics suggest that our model is appropriate for inference. You can see the diagnostic plots 
-in Figure \ref{fig:diagnostic_plots}, this is the polt for the period 2005-2009. For different periods, the diagnostic plots are similar.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{figure/diagnostic_plots_mydf_2005_2009.png}
     \caption{Comparison of Marginal Effects Between Periods.}
     \label{fig:diagnostic_plots}
 \end{figure}
-
+For our parsimonious linear regression models, which is actually our first type of model. We conducted standard model diagnostic checks using residual 
+plots. The Residuals vs Fitted plot shows no strong patterns, supporting the linearity assumption. The Q-Q plot indicates that residuals are 
+approximately normally distributed. The Scale-Location plot suggests constant variance of residuals. Finally, the Residuals vs Leverage plot does not 
+show any extreme influential observations. Overall, the diagnostics suggest that our model is appropriate for inference. You can see the diagnostic plots 
+in Figure \ref{fig:diagnostic_plots}, this is the polt for the period 2005-2009. For different periods, the diagnostic plots are similar.
 
 %----------------------------------------------------------------------------------------
 % Conclusion
 %----------------------------------------------------------------------------------------
 
 \section{Conclusion}
+In this project, we investigated how the importance of three-point shooting has evolved in relation to NBA team success. 
+By analyzing team-level data from two distinct eras and fitting both period-specific and interaction models, we found that three-point 
+shooting efficiency has become a significantly stronger predictor of win rate in the modern era. Meanwhile, the influence of two-point 
+shooting has declined, and merely increasing three-point shot volume without efficiency gains does not lead to higher success.
 
+These findings provide quantitative evidence of a structural shift in NBA strategy toward perimeter-oriented offenses. Our results support 
+the widely discussed idea of a "three-point era," highlighting how team success today relies more heavily on shooting efficiency beyond the 
+arc. Future research could further explore player-level adaptations and defensive responses accompanying this evolution.
 %----------------------------------------------------------------------------------------
-% Conclusion
+% References
 %----------------------------------------------------------------------------------------
 
 \newpage % Includes a new page
@@ -356,7 +396,7 @@ in Figure \ref{fig:diagnostic_plots}, this is the polt for the period 2005-2009.
 \bibliographystyle{apsr} % Defines your bibliography style
 
 %----------------------------------------------------------------------------------------
-% Conclusion
+% Appendix
 %----------------------------------------------------------------------------------------
 
 \newpage
