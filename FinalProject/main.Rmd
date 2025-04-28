@@ -81,4 +81,37 @@ mydf_2005_2009_confounder <- mydf_2005_2009[, !(names(mydf_2005_2009) %in% c("X"
 model_2015_2019_confounder0 <- lm(WinRate ~ ., data = mydf_2005_2009_confounder)
 summary(model_2015_2019_confounder0)
 ```
+```{r}
+mydf_2005_2009_confounder <- mydf_2005_2009[, !(names(mydf_2005_2009) %in% c("X", "TEAM_ID", "TEAM_NAME", "FG_PCT", "X2P_ratio", "PTS", "PLUS_MINUS"))]
+model_2015_2019_confounder0 <- lm(WinRate ~ ., data = mydf_2005_2009_confounder)
+summary(model_2015_2019_confounder0)
+```
+```{r}
+library(ggplot2)
+library(tidyr)
+
+# 先把你的数据建出来
+df <- data.frame(
+  Period = c("2005-2009", "2010-2014", "2015-2019", "2020-2024"),
+  Coef_3P = c(1.8842, 2.6011, 3.8326, 4.7683),
+  Coef_2P = c(3.7431, 4.0901, 3.1201, 2.1837)
+)
+
+# 把宽格式变成长格式
+df_long <- pivot_longer(df, cols = c(Coef_3P, Coef_2P),
+                        names_to = "Variable", values_to = "Coefficient")
+jpeg("img/Coefficients Over Time by Variable.jpg", width = 3000, height = 1500, res = 300)
+# 折线图
+ggplot(df_long, aes(x = Period, y = Coefficient, color = Variable, group = Variable)) +
+  geom_line(size = 1.2) +
+  geom_point(size = 3) +
+  labs(
+    title = "Coefficients Over Time by Variable",
+    x = "Period",
+    y = "Coefficient",
+    color = "Variable"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))  # 让x轴标签斜着排防止重叠
+```
 
