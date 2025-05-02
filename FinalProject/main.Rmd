@@ -77,14 +77,14 @@ head(mydf_2005_2009)
 
 
 ```{r}
-mydf_2005_2009_confounder <- mydf_2005_2009[, !(names(mydf_2005_2009) %in% c("X", "TEAM_ID", "TEAM_NAME", "FG_PCT", "X2P_ratio"))]
-model_2015_2019_confounder0 <- lm(WinRate ~ ., data = mydf_2005_2009_confounder)
-summary(model_2015_2019_confounder0)
+mydf_2020_2024_confounder <- mydf_2020_2024[, !(names(mydf_2020_2024) %in% c("X", "TEAM_ID", "TEAM_NAME", "FG_PCT", "X2P_ratio"))]
+model_2020_2024_confounder0 <- lm(WinRate ~ ., data = mydf_2020_2024_confounder)
+summary(model_2020_2024_confounder0)
 ```
 ```{r}
-mydf_2005_2009_confounder <- mydf_2005_2009[, !(names(mydf_2005_2009) %in% c("X", "TEAM_ID", "TEAM_NAME", "FG_PCT", "X2P_ratio", "PTS", "PLUS_MINUS"))]
-model_2015_2019_confounder0 <- lm(WinRate ~ ., data = mydf_2005_2009_confounder)
-summary(model_2015_2019_confounder0)
+mydf_2020_2024_confounder <- mydf_2020_2024[, !(names(mydf_2020_2024) %in% c("X", "TEAM_ID", "TEAM_NAME", "FG_PCT", "X2P_ratio", "PTS", "PLUS_MINUS"))]
+model_2020_2024_confounder0 <- lm(WinRate ~ ., data = mydf_2020_2024_confounder)
+summary(model_2020_2024_confounder0)
 ```
 ```{r}
 library(ggplot2)

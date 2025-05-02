@@ -13,6 +13,7 @@
 \usepackage[german,english]{babel} % English and German language 
 \usepackage{booktabs} % Horizontal rules in tables 
 % For generating tables, use “LaTeX” online generator (https://www.tablesgenerator.com)
+\usepackage{placeins}
 \usepackage{comment} % Necessary to comment several paragraphs at once
 \usepackage[utf8]{inputenc} % Required for international characters
 \usepackage[T1]{fontenc} % Required for output font encoding for international characters
@@ -25,12 +26,13 @@
 \usetikzlibrary{decorations.pathreplacing} % Adding libraries for decorations and paths
 \usepackage{tikzsymbols} % For amazing symbols ;) https://mirror.hmc.edu/ctan/graphics/pgf/contrib/tikzsymbols/tikzsymbols.pdf 
 \usepackage{blindtext} % To add some blind text in your paper
-
+\usepackage{subcaption} % For subfigure environment
+\usepackage{hyperref}
 
 %---------------------------------------------------------------------------------
 % Additional settings
 %---------------------------------------------------------------------------------
-
+\usepackage{indentfirst} 
 %---------------------------------------------------------------------------------
 % Define your margins
 \usepackage{geometry} % Necessary package for defining margins
@@ -135,256 +137,337 @@ Stanley Zheng \space Eric \space Lucas
 % Abstract
 %----------------------------------------------------------------------------------------
 \setcounter{page}{1} % Sets counter of page to 1
-\section{Abstract} % Adds a section title
-This project investigates how the relationship between three-point shooting and team success 
-in the NBA has evolved over the past two decades. Using team-level data from the 2003-04 and 
-2023-24 regular seasons obtained via the NBA API, we construct multiple linear regression 
-models to examine the effects of three-point percentage (3P\%), two-point percentage (2P\%), 
-and shot selection proportions on win rate. Our analysis reveals a statistically significant 
-interaction between 3P\% and era, indicating that the marginal impact of three-point accuracy 
-on team success has increased substantially in the modern NBA. While 3P\% showed no significant 
-association with win rate in 2003-04, it has become a strong predictor in 2023-24—even after 
-controlling for other efficiency metrics. This shift reflects a broader structural change in 
-league strategy, marking the emergence of a “three-point era.” Though based on observational 
-data, the use of interaction terms allows for a quasi-causal interpretation of this evolving 
-relationship.
 %----------------------------------------------------------------------------------------
 % Introduction
 %----------------------------------------------------------------------------------------
-\section{Introduction} % Add a section title
-\subsection{Motivation} % Add a subsection title
-Over the past two decades, the NBA has undergone a dramatic transformation in offensive strategy. 
-The rise of “small-ball” systems and analytics-driven decision making has led to a surge in 
-three-point attempts, reshaping how teams space the floor, select shots, and build rosters. 
-Players like Stephen Curry have redefined the value of long-range shooting, prompting coaches 
-and front offices to reconsider the role of the three-point shot in winning games. This project 
-is motivated by a key question at the heart of this shift: Has the importance of three-point 
-shooting truly increased over time, and if so, how does it compare to traditional metrics like 
-two-point efficiency or shot selection proportions? By using regression analysis on team-level 
-data from different seansons, we aim to quantify how the statistical relationship 
-between shooting performance and win rate has changed. In the era of big data, we believe that 
-understanding these evolving dynamics can help teams identify actionable areas for improvement 
-and optimize offensive strategies for greater success.
-\subsection{Dataset}
-Our dataset is sourced from the NBA's public API, an online interface that provides comprehensive 
-and standardized statistics for teams and players across multiple seasons. The NBA API offers detailed 
-data covering a wide range of performance categories, including shooting statistics, rebounding, passing, 
-turnovers, fouls, player efficiency metrics, and advanced team analytics.
 
-The full dataset records team-level aggregates for each regular season, capturing key indicators such as 
-field goal percentages, three-point and two-point shooting volume and accuracy, free throw statistics, 
-rebound counts, assist counts, turnover rates, steal and block numbers, and overall team performance metrics 
-like win-loss records and plus-minus ratings. The structure of the dataset is shown in the Figure \ref{fig:original_data}, and the 
-detailed explanation of each variable is shown in the Appendix.
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.9\textwidth]{figure/original_data.png}
-    \caption{The Description of The Original Dataset.}
-    \label{fig:original_data}
-\end{figure}
+\section{Introduction} % Main section title
 
-For our analysis, we primarily focus on shooting-related metrics, including three-point field goal percentage (3P\%), 
-two-point field goal percentage (2P\%), three-point attempt rate (3PA rate), and two-point attempt rate (2PA rate). 
-Three-point and two-point attempt rates are computed as the proportion of total field goal attempts originating from 
-each respective shot zone. To control for other aspects of team strength that may confound the relationship between 
-shooting performance and win rate, we also incorporate variables such as total rebounds, turnovers, and other 
-team-level performance indicators as covariates in our regression models. This approach allows us to better isolate 
-the specific impact of shooting metrics on team success across different eras.
-% Some example text
-% \LaTeX allows you to highlight text in various ways: \textbf{bold}, \textit{italics}, with \textsc{small caps} or \texttt{as a coding font}.\footnote{ This command adds a footnote to your text.} 
-% Citing in \LaTeX is easy. You could easier cite with the text flow like this ``Referring to \citet{collier2004greed} ...''  or at the end of the sentence \cite{collier2004greed}. You can also cite pages like this \citep[55]{collier2004greed}. If you want to add an additional note, you might want to do it this way \citep[cp.][22]{collier2004greed} or like this \citep[cp.][]{collier2004greed}.\\
+\subsection{Motivation: The Shifting Landscape of the NBA} % Sub-section 1.1
+% Paragraph 1: General observation and the basic rule
+Over the last couple of decades, anyone watching the NBA has noticed a big change in how the game is played. We see teams shooting 
+way more three-pointers than before. It makes sense to ask why. In the NBA, the basic rule is that shots made inside the arc are 
+worth 2 points, while shots made further out, behind the arc, are worth 3 points. This simple difference in scoring value seems to 
+have encouraged teams to focus more and more on shooting from distance.
+
+% Paragraph 2: The "Three-Point Era" narrative and motivation for study
+This trend is so noticeable that people often talk about the modern NBA as the "Three-Point Era". Famous players like Stephen Curry 
+really showed how valuable long-range shooting can be, making teams rethink their strategies. But is this just a popular trend, or 
+has the actual importance of making three-pointers for winning games really increased compared to the past? For teams trying to win 
+championships, understanding if and how the value of different shots has changed is really important. In today's world with lots of 
+data available, we felt that using statistical analysis could help quantify this change and maybe offer useful insights for teams 
+trying to optimize how they play.
+
+\subsection{Research Question and Approach} % Sub-section 1.2
+% Paragraph 1: Core question and the "story"
+
+So, the main question we wanted to investigate in this project is: How has the \textbf{statistical association} between key shooting 
+metrics, especially three-point percentage (3P\%), and team success, measured by win rate, changed over the last approximately 
+15-20 years? Our "story" is essentially testing the common idea that the NBA has truly entered a "three-point era" where making 
+threes is more strongly linked to winning than it used to be.
+
+% Paragraph 2: Challenge and approach
+We need to be careful, though. We are using data collected from watching games (observational data), not from a controlled 
+experiment like an RCT (Randomized Controlled Trial). This means we can't easily prove that shooting more threes \textbf{causes} more 
+wins, because many other things might be happening at the same time (like better players, different defenses, rule changes). So, 
+our approach is to use statistical tools to look for strong patterns or \textbf{structural evidence} in the data that show if the association between 3P\% and winning has really 
+changed significantly over time, while trying to account for some other factors. Our goal is to describe this change accurately 
+based on the statistics, aiming for an interpretation that acknowledges these limitations but points towards the changing dynamics 
+(a quasi-causal goal).
+
+\subsection{Thesis Statement} % Sub-section 1.3
+% Paragraph 1: Presenting the thesis
+Using data comparing the 2005-2009 and 2020-2024 NBA regular seasons (source: NBA API \href{https://github.com/swar/nba_api}{https://github.com/swar/nba\_api}), we find the statistical association between 
+three-point percentage (3P\%) and win rate differs significantly between these periods: NBA team-seasons (unit of analysis) in 
+the 2020-2024 period with higher 3P\% also have statistically significant higher win rates, while NBA team-seasons in the 2005-2009 
+period did not have statistically significant higher win rates, even after controlling for two-point efficiency and shot selection 
+proportions.
+
+%----------------------------------------------------------------------------------------
+% End of Introduction Section
+%----------------------------------------------------------------------------------------
 
 %----------------------------------------------------------------------------------------
 % Data Analysis
 %----------------------------------------------------------------------------------------
 
-\section{Data Analysis}
+\section{Methods}
+\subsection{Dataset}
+Our dataset is sourced from the \href{https://github.com/swar/nba_api}{NBA's public API}, an online interface that provides comprehensive 
+and standardized statistics for teams and players across multiple seasons. The NBA API offers detailed 
+data covering a wide range of performance categories, including shooting statistics, rebounding, passing, 
+turnovers, fouls, player efficiency metrics, and advanced team analytics.
+
+For our analysis, we primarily focus on shooting-related metrics, including three-point field goal percentage (3P\%), 
+two-point field goal percentage (2P\%), three-point attempt rate (3PA rate), and two-point attempt rate (2PA rate). 
+Even from the original dataset, 
+
+To motivate our investigation into how the impact of three-point shooting on team success has evolved, 
+we begin by comparing data from the 2005-2009 and 2020-2024 NBA regular seasons using two sets of visualizations.
+
+% The first set of histograms(Figure \ref{fig:3P_shooting_percent}) shows the three-point shooting percentage (3P\%), capturing efficiency on three-point attempts. While the 
+% distributions for the two periods overlap significantly, there is a modest rightward shift, indicating that teams have become slightly 
+% more accurate from beyond the arc over time. This suggests that the increase in three-point volume has not come at the expense of efficiency, 
+% but rather, teams have adapted by developing better shooters and improving shot quality.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figure/3 point shooting percentage.jpg}
+    \includegraphics[width=0.6\textwidth]{figure/3 point attempt rate.jpg}
+    \caption{Changes in three-point attempt rate (left) and shooting accuracy (right) between 2005-2009 and 2020-2024.}
+    \label{fig:1}
+\end{figure}
+
+% The second set of histograms(Figure \ref{fig:3P_attempt_rate}) displays the three-point attempt rate (3P\_ratio), defined as the proportion of a team's total field goal 
+% attempts that are three-pointers. We observe a substantial rightward shift over time: in the 2005–2009 period, teams clustered around a 
+% 20\% attempt rate, whereas by 2020-2024, the distribution centers around 38-40\%. This sharp increase visually confirms the commonly 
+% cited notion that the NBA has entered a “small ball” era, characterized by greater reliance on perimeter shooting and faster-paced offenses.
+
+
+% Together, these visualizations provide structural evidence for a fundamental change in league-wide offensive strategy. 
+% The sharp increase in three-point attempt rates, coupled with stable or slightly improved three-point accuracy, sets the stage for our 
+% central analysis: evaluating whether and how the growing emphasis on three-point shooting translates into higher win rates in the modern NBA.
+Figure \ref{fig:1} provides a visual summary of the changes in three-point shooting behavior over time. The pie charts (left) show a 
+substantial increase in the proportion of field goal attempts that are three-pointers, rising from 21.1\% in 2005-2009 to 39.2\% 
+in 2020-2024. Meanwhile, the overlaid histograms indicate that teams have also become slightly more accurate, 
+with the distribution of three-point shooting percentages shifting modestly to the right in the modern era. This actually a very strong 
+signal since the accuracy is kind of hard to improve, such a notable shift is already very impressive.
+
+These visual trends motivate our modeling approach: to statistically examine whether the growing reliance on three-point shooting 
+has translated into greater influence on win rate, and whether this shift reflects a broader structural transformation in NBA 
+offensive strategy.
+
+
 \subsection{Data Preprocess}
-Our data preprocessing involved three major steps. First, we retrieved the raw data from an API, where each table corresponds 
-to a different season, and each row records a team's performance for that year. Therefore, our unit of analysis is team/year.
+Our data preprocessing involved two main steps. First, we retrieved the raw team-level statistics using the NBA API, 
+where each table corresponds to a single season, and each row records a team's aggregate performance for that year. 
+We combined the annual tables into four period-specific datasets, grouped by five-year intervals (2005-2009, 2010-2014, 2015-2019, 
+and 2020-2024).
 
-As shown in Figure \ref{fig:original_data}, a large portion of the raw variables consisted of rankings (e.g., team rank in various metrics), 
-which we decided to remove, as they are not suitable for our analysis. We also observed that the raw data already included some 
-basic performance statistics, such as win percentage (W\_PCT) and three-point shooting percentage(FG3\_PCT). However, since the available 
-statistics were limited to only a few dimensions, we manually calculated additional variables: win rate(WinRate), three-point attempt rate(3P\_ratio), 
-three-point shooting percentage(3P\%), and two-point shooting percentage(2P\%).
+Second, we performed variable selection and transformation. A large portion of the original variables were rankings (e.g., team 
+rank in field goal percentage or rebounds), which we excluded, as they are ordinal and not suitable for regression analysis. 
+We also observed that while the raw data included a few basic statistics (e.g., win percentage and FG3\_PCT), it lacked several 
+metrics relevant to our analysis. We therefore manually computed key variables, including win rate (WinRate), three-point attempt 
+rate (3P\_ratio), three-point shooting percentage (3P\%), and two-point shooting percentage (2P\%). Since 3P\_ratio and 2P\_ratio 
+are linearly dependent (they sum to 1), we included only 3P\_ratio in our models to avoid multicollinearity.
 
-We found that the three-point attempt rate and the two-point attempt rate are in a perfect linear relationship (they add up to 1), 
-so we included only the three-point attempt rate in our models to avoid multicollinearity.
+\subsection{Statistical Techniques}
+We began our analysis by fitting a simple linear regression model using team-level three-point field goal percentage (3P\%), 
+two-point field goal percentage (2P\%), and three-point attempt rate (3P\_ratio) to predict regular season win rate. This baseline 
+model allowed us to examine how different aspects of team shooting efficiency are associated with success across seasons.
 
-Finally, because most of our key variables, such as win rate and shooting percentages, naturally fall within the range [0, 1], 
-we applied normalization to the other numerical variables as well to ensure these variables also fall with in the range [0, 1], 
-which maintains the consistency across features. 
+To assess whether the impact of three-point shooting has changed over time, we then fit an interactive linear model. In this model, 
+we included interaction terms between the shooting variables and a binary era indicator (early era vs. modern era). This design 
+enables us to statistically test whether the relationship between three-point efficiency and win rate has become significantly 
+stronger in recent years, rather than relying solely on visual or descriptive comparisons.
 
-\subsection{Data Visulization}
-To motivate our investigation into the evolving impact of three-point shooting on team success, we first examine two sets of histograms 
-comparing the 2005-2009 and 2020-2024 NBA regular seasons.
+% Finally, to account for potential confounding factors, we extended our model by including a set of additional control variables 
+% such as total rebounds, turnovers, free throw percentage, and assists. These variables may influence team success and could also 
+% be correlated with shooting performance, thus serving as potential confounders. Including them in the model allows us to assess 
+% whether the effect of three-point shooting remains significant after accounting for other team performance metrics.
 
-The first set of histograms(Figure \ref{fig:3P_shooting_percent}) shows the three-point shooting percentage (3P\%), capturing efficiency on three-point attempts. While the 
-distributions for the two periods overlap significantly, there is a modest rightward shift, indicating that teams have become slightly 
-more accurate from beyond the arc over time. This suggests that the increase in three-point volume has not come at the expense of efficiency, 
-but rather, teams have adapted by developing better shooters and improving shot quality.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.9\textwidth]{figure/3P shooting percent.jpg}
-    \caption{3 Point Shooting Percent in Two Different Period.}
-    \label{fig:3P_shooting_percent}
-\end{figure}
-
-The second set of histograms(Figure \ref{fig:3P_attempt_rate}) displays the three-point attempt rate (3P\_ratio), defined as the proportion of a team's total field goal 
-attempts that are three-pointers. We observe a substantial rightward shift over time: in the 2005–2009 period, teams clustered around a 
-20\% attempt rate, whereas by 2020-2024, the distribution centers around 38-40\%. This sharp increase visually confirms the commonly 
-cited notion that the NBA has entered a “small ball” era, characterized by greater reliance on perimeter shooting and faster-paced offenses.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.9\textwidth]{figure/3 point attempt rate.jpg}
-    \caption{3 Point Attempt Rate in Two Different Period.}
-    \label{fig:3P_attempt_rate}
-\end{figure}
-
-Together, these visualizations provide structural evidence for a fundamental change in league-wide offensive strategy. 
-The sharp increase in three-point attempt rates, coupled with stable or slightly improved three-point accuracy, sets the stage for our 
-central analysis: evaluating whether and how the growing emphasis on three-point shooting translates into higher win rates in the modern NBA.
+To evaluate the validity of our regression models, we also performed standard diagnostic checks. Specifically, we examined 
+residual plots including Residuals vs Fitted, Normal Q-Q, Scale-Location, and Residuals vs Leverage. These plots allow us to 
+assess key assumptions of linear regression such as linearity, homoscedasticity, normality of residuals, and the presence of 
+influential points. The diagnostic results did not reveal major violations, suggesting that the fitted models are reasonably 
+appropriate for the data.
 
 
-%---------------------------------------------------------------------------------
-% Model
-%---------------------------------------------------------------------------------
+%----------------------------------------------------------------------------------------
+% Results Section
+%----------------------------------------------------------------------------------------
 
-\section{Model}
-\subsection{Model Specification}
-\subsubsection{Parsimonious Linear Regression}
-To examine how the relationship between shooting efficiency and team success has evolved over time, we first fit a parsimonious linear 
-regression model in each era, using team win rate (WinRate) as the dependent variable. The explanatory variables included three-point 
-field goal percentage (3P\%), two-point field goal percentage (2P\%), and three-point attempt rate (3P\_ratio). 
-\[
+\section{Results}
+\subsection{Initial Analysis: Period-Specific Associations}
+% Word Count: Approx. 350-450 words
+
+To get a first look at how relationships might have changed, we fitted separate simple linear regression models for 
+different 5-year periods, specified as follows:
+\begin{equation*}
 \text{WinRate} = \beta_0 + \beta_1 \times \text{3P\%} + \beta_2 \times \text{2P\%} + \beta_3 \times \text{3P\_ratio} + \epsilon
-\]
-This minimal specification 
-allows us to isolate the marginal effects of shooting efficiency without the confounding influence of other team characteristics.
+\end{equation*}
+We focus here on comparing the earliest period with the latest period(2005-2009 vs 2020-2024). Figure \ref{fig:period_models} displays the summary outputs 
+for these two models.
 
-We separately fit the model to two distinct periods: the 2005--2009 seasons and the 2020--2024 seasons. The regression results reveal 
-clear structural differences between eras.
-
-In the 2005--2009 model, two-point field goal percentage (2P\%) is highly significant ($p \approx 3.11\times 10^{-08}$) and exhibits a strong positive 
-relationship with win rate (coefficient = 3.7431). Three-point field goal percentage (3P\%) is statistically significant at the 1\% level 
-($p \approx 0.0038$), which is just a 2 stars significant in R, and its impact (coefficient = 1.8842) is noticeably smaller than that of two-point 
-efficiency. Three-point attempt rate (3P\_ratio) shows no statistical significance ($p \approx 0.301$). The detailed model summary is shown in 
-Figire \ref{fig:model0_2005_2009} left.
-\begin{figure}[htbp]
+\begin{figure}[htbp] 
     \centering
-    \includegraphics[width=0.45\textwidth]{figure/model0_2005_2009.png}
-    \includegraphics[width=0.45\textwidth]{figure/model0_2020_2024.png}
-    \caption{model0 2005 2009.}
-    \label{fig:model0_2005_2009}
+    % Using subcaption package for side-by-side figures
+    % Make sure \usepackage{subcaption} is in your preamble
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{figure/model0_2005_2009.png} % Ensure path is correct
+        \caption{Model Summary: 2005-2009 Period.}
+        \label{fig:model_0509}
+    \end{subfigure}\hfill % \hfill creates space between figures
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{figure/model0_2020_2024.png} % Ensure path is correct
+        \caption{Model Summary: 2020-2024 Period.}
+        \label{fig:model_2024}
+    \end{subfigure}
+    \caption{Comparison of Parsimonious Linear Regression Model Summaries for Early and Recent Eras.}
+    \label{fig:period_models}
 \end{figure}
 
-By contrast, in the 2020--2024 model, three-point field goal percentage (3P\%) becomes even more strongly significant ($p \approx 5.58 \times 10^{-14}$) 
-and its marginal effect size increases substantially (coefficient = 4.7683). Meanwhile, the coefficient on two-point field goal percentage 
-(2P\%) decreases to 2.1837, although it remains statistically significant. Again, three-point attempt rate (3P\_ratio) remains statistically 
-insignificant. The detailed model summary is shown in Figire \ref{fig:model0_2005_2009} right.
+Comparing the outputs shown in Figure \ref{fig:period_models}, we observe notable differences between the two periods. 
+In the 2005-2009 model (Figure \ref{fig:model_0509}), both two-point percentage (\texttt{X2P.}) and three-point percentage 
+(\texttt{X3P.}) show statistically significant positive associations with \texttt{WinRate}. However, the estimated coefficient 
+for \texttt{X2P.} (approximately 3.74) is considerably larger than that for \texttt{X3P.} (approximately 1.88). Furthermore, 
+the p-value associated with \texttt{X2P.} is much smaller ($p < 0.001$) compared to the p-value for \texttt{X3P.} 
+($p \approx 0.0038$). In this earlier period, the three-point attempt rate (\texttt{X3P\_ratio}) was not found to have 
+a statistically significant association with \texttt{WinRate}.
 
-These patterns suggest a fundamental shift:
-\begin{itemize}
-    \item In the earlier period, improving two-point shooting efficiency had a larger marginal benefit to team success than improving three-point 
-    efficiency.
-    \item In the modern period, improving three-point shooting efficiency has become more important than two-point efficiency, with its estimated 
-    impact on win rate more than doubling the impact of two-point shooting.
-\end{itemize}
+In contrast, when looking at the 2020-2024 model (Figure \ref{fig:model_2024}), while both \texttt{X2P.} and \texttt{X3P.} 
+remain statistically significant and positively associated with \texttt{WinRate}, their apparent relative importance seems to 
+have reversed. The coefficient for \texttt{X3P.} (approximately 4.77) is now substantially larger than the coefficient 
+for \texttt{X2P.} (approximately 2.18). The very small p-value for \texttt{X3P.} ($p < 0.001$) indicates a very strong 
+statistical association in this recent period. Similar to the earlier period, \texttt{X3P\_ratio} remains non-significant. 
+This initial comparison suggests a potential shift: the positive association between three-point efficiency and winning appears 
+stronger in the recent era, while the association for two-point efficiency might have weakened.
 
-This transition supports the hypothesis that the NBA has entered a ``three-point era,'' where teams' success increasingly depends on their ability to 
-make three-point shots efficiently rather than solely relying on two-point scoring.
+To visualize these changes more broadly, we plotted the estimated coefficients and their corresponding p-values (on a reversed 
+log scale) for \texttt{X3P.} and \texttt{X2P.} across four consecutive 5-year periods. Figure \ref{fig:trends} presents these trends.
 
-More than these two models, I also fit another two models in the periods 2010-2014 and 2015-2019. Using the data from these four models, I have create a 
-table and a line chart. You can see the strong trend that 3P\% is more and more important with the time goes in the Table \ref{tab:coefficients_comparison} 
-and the Figure \ref{fig:coefficients_comparison}.
-\vspace{0.5cm}
-
-\begin{table}[h]
-\centering
-\begin{tabular}{lcccc}
-\hline
-\textbf{Variable} & \textbf{2005-2009} & \textbf{2010-2014} & \textbf{2015-2019} & \textbf{2020-2024}  \\
-\hline
-3P\%(coefficient) & 1.8842 & 2.6011 & 3.8326  & 4.7683  \\
-2P\%(coefficient) & 3.7431 & 4.0901 & 3.1201 & 2.1837  \\
-3P\%(significance) & 0.00381 & $4.09 \times 10^{-6}$ & $1.13 \times 10^{-9}$ & $5.58 \times 10^{-14}$  \\
-2P\%(significance) & $3.11 \times 10^{-8}$  & $1.64 \times 10^{-12}$ & $1.51 \times 10^{-8}$ & $1.65 \times 10^{-6}$  \\
-3P\_ratio(significance) & 0.30118 (n.s.) & 0.191 (n.s.) & 0.0966 (n.s.) & 0.434 (n.s.)\\
-\hline
-\end{tabular}
-\caption{Comparison of Marginal Effects Between Periods}
-\label{tab:coefficients_comparison}
-\end{table}
-\begin{figure}[htbp]
+% Figure for trend plots side-by-side
+\begin{figure}[htbp] 
     \centering
-    \includegraphics[width=0.45\textwidth]{figure/Coefficients Over Time by Variable.jpg}
-    \includegraphics[width=0.45\textwidth]{figure/P-value Trends Over Time.jpg}
-    \caption{Comparison of Marginal Effects Between Periods.}
-    \label{fig:coefficients_comparison}
+    % Using subcaption package for side-by-side figures
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{figure/Coefficients Over Time by Variable.jpg} % Ensure path is correct
+        \caption{Trend in Estimated Coefficients.}
+        \label{fig:coef_trends}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.48\textwidth}
+        \includegraphics[width=\linewidth]{figure/P-value Trends Over Time.jpg} % Ensure path is correct
+        \caption{Trend in P-values (Reversed Log Scale).}
+        \label{fig:pval_trends}
+    \end{subfigure}
+    \caption{Trends in Coefficients and P-values for \texttt{X3P.} and \texttt{X2P.} from Period-Specific Regressions.}
+    \label{fig:trends}
 \end{figure}
 
-\subsubsection{Interaction Model}
-To capture the evolving relationship between shooting metrics and team success over time, we fit an interactive linear regression model 
-incorporating both main effects and interaction terms with era. The model is specified as:
+Figure \ref{fig:coef_trends} clearly shows the coefficient for \texttt{X3P.} (blue line) steadily increasing over time, 
+while the coefficient for \texttt{X2P.} (red line) generally decreases after the 2010-2014 period. Figure \ref{fig:pval_trends} 
+complements this by showing the p-value associated with \texttt{X3P.} decreasing (indicating strengthening statistical significance), 
+while the p-value for \texttt{X2P.}, although remaining significant, shows less of a strengthening trend. These descriptive trends 
+strongly indicate a changing relationship and motivate the use of an interaction model to formally test the significance of 
+this observed shift.
+
+\subsection{The Interaction Model}
+% Word Count: Approx. 250-350 words
+
+To capture the evolving relationship between shooting metrics and team success over time, we fit an interactive linear regression model incorporating both main effects and interaction terms with era. The model is specified as:
 \begin{align*}
-    \text{WinRate} =\ & \beta_0 + \beta_1 \text{3P\%} + \beta_2 \text{2P\%} + \beta_3 \text{3P\_ratio} + \beta_4 \text{2P\_ratio} + \beta_5 \text{Era} + \beta_6 (\text{3P\%} \times \text{Era}) \\
-    &+ \beta_7 (\text{2P\%} \times \text{Era}) + \beta_8 (\text{3P\_ratio} \times \text{Era}) + \beta_9 (\text{2P\_ratio} \times \text{Era}) + \epsilon.
-\end{align*}
-Our model summary is shown in Figure \ref{fig:model1}.
-\begin{figure}[htbp]
+    \text{WinRate} =\ & \beta_0 + \beta_1 \cdot \text{3P\%} + \beta_2 \cdot \text{2P\%} + \beta_3 \cdot \text{3P}_{\text{ratio}} + \beta_4 \cdot \text{2P}_{\text{ratio}} + \beta_5 \cdot \text{Era} \\
+    & + \beta_6 \cdot (\text{3P\%} \times \text{Era}) + \beta_7 \cdot (\text{2P\%} \times \text{Era}) + \beta_8 \cdot (\text{3P}_{\text{ratio}} \times \text{Era}) \\
+    & + \beta_9 \cdot (\text{2P}_{\text{ratio}} \times \text{Era}) + \epsilon
+    \end{align*}
+
+Our model summary is shown in Table \ref{tab:interaction_summary_R}.
+
+% --- START: Interaction Model Summary Table based on R output image ---
+\begin{table}[htbp]
+\centering
+\caption{Summary of Interaction Model Results (Response: WinRate, based on R output)}
+\label{tab:interaction_summary_R}
+% Using booktabs package for better table formatting
+% Make sure \usepackage{booktabs} is in your preamble
+\begin{tabular}{lrrrl}
+\toprule
+Predictor & Estimate & Std. Error & t value & Pr(>|t|) \\
+\midrule
+(Intercept) & -2.0312 & 0.2812 & -7.224 & 4.41e-12 *** \\ 
+X3P. & 1.8842 & 0.5918 & 3.184 & 0.001610 ** \\ 
+X2P. & 3.7431 & 0.5910 & 6.334 & 9.02e-10 *** \\ 
+X3P\_ratio & 0.2650 & 0.2359 & 1.123 & 0.262187 \\ 
+Era (1 = 2020-24) & -0.2905 & 0.3879 & -0.749 & 0.454448 \\ 
+\textbf{X3P.:Era} & \textbf{2.8842} & \textbf{0.8641} & \textbf{3.338} & \textbf{0.000954 ***} \\ 
+X2P.:Era & -1.5594 & 0.7616 & -2.047 & 0.041509 * \\ 
+X3P\_ratio:Era & -0.4431 & 0.3434 & -1.290 & 0.197976 \\ 
+\midrule
+\multicolumn{5}{l}{\textit{Signif. codes: 0 `***' 0.001 `**' 0.01 `*' 0.05 `.' 0.1 ` ' 1}} \\
+\multicolumn{5}{l}{Residual standard error: 0.1123 on 292 degrees of freedom} \\ 
+\multicolumn{5}{l}{Multiple R-squared: 0.4301, Adj. R-squared: 0.4165} \\ 
+\multicolumn{5}{l}{F-statistic: 31.49 on 7 and 292 DF, p-value: < 2.2e-16} \\ 
+\bottomrule
+\end{tabular}
+\end{table}
+% --- END: Interaction Model Summary Table ---
+
+The results in Table \ref{tab:interaction_summary_R} provide the crucial statistical evidence for our study. 
+The key term is the interaction between three-point percentage and era (\texttt{X3P.:Era}). Its coefficient is 
+approximately 2.8842 and is highly statistically significant (p $\approx$ 0.000954, `***'). This positive and 
+significant interaction term statistically confirms our central hypothesis: the positive association between a 
+team's \texttt{X3P.} and its \texttt{WinRate} is significantly stronger in the 2020-2024 era (Era=1) compared to 
+the baseline 2005-2009 era (Era=0). Specifically, for every one percentage point increase in \texttt{X3P.}, the 
+associated increase in \texttt{WinRate} is estimated to be about 2.88 points higher in the 2020-2024 era than it 
+was in the 2005-2009 era, holding other predictors constant.
+
+Furthermore, the interaction term \texttt{X2P.:Era} has a coefficient of approximately -1.5594 and is statistically 
+significant at the 0.05 level (p $\approx$ 0.0415, `*'). This suggests that the positive association between \texttt{X2P.} 
+and \texttt{WinRate} significantly weakened in the later era compared to the baseline era. These findings align perfectly 
+with the descriptive trends shown in Figure \ref{fig:coef_trends}. The main effects for \texttt{X3P.} and \texttt{X2P.} 
+represent their associations in the baseline (2005-2009) era, both being positive and significant. Other terms, including 
+\texttt{X3P\_ratio}, its interaction with era, and the main effect of \texttt{Era}, did not show statistically significant 
+associations in this model. The overall model provides a reasonable fit (Adjusted R-squared $\approx$ 0.4165) and is 
+highly significant overall (F-statistic p-value < 2.2e-16). The strong significance of the \texttt{X3P.:Era} interaction 
+provides the formal statistical validation for our thesis about the changing relationship.
+
+\subsection{Model Diagnostics}
+\begin{figure}[htbp] 
     \centering
-    \includegraphics[width=0.8\textwidth]{figure/interative model.png}
-    \caption{Interaction Model.}
-    \label{fig:model1}
+    \includegraphics[width=0.9\textwidth]{figure/diagnostic_plots_mydf_2005_2009.png} 
+    \caption{Diagnostic Plots for the Interaction Model.} 
+    \label{fig:diagnostic_plots_interaction}
 \end{figure}
+\FloatBarrier %
+Finally, we assessed the validity of the assumptions underlying the OLS regression for our final interaction model (results in Table \ref{tab:interaction_summary_R}). The standard diagnostic plots associated with this model are presented in Figure \ref{fig:diagnostic_plots_interaction}. 
 
-The regression results reveal important structural changes between eras. When fitting separate models for the earlier and modern periods, 
-we observed that the marginal effect of three-point shooting on win rate increased over time, while the effect of two-point shooting declined. 
-The interactive model formally confirms these trends and provides statistical evidence that the changes are significant.
+Visual inspection of these plots provides confidence in our model. The 'Residuals vs Fitted' plot displays points scattered fairly randomly around the horizontal line at zero, without a clear non-linear pattern or a distinct funnel shape, which supports the assumptions of linearity and constant variance (homoscedasticity). The 'Normal Q-Q' plot shows the standardized residuals falling generally close to the theoretical diagonal line, suggesting that the normality assumption for the residuals is reasonably met, although there might be slight deviations in the tails as is common with real-world data. The 'Scale-Location' plot further examines the homoscedasticity assumption; the points appear relatively evenly spread across the range of fitted values, and the smoothed red line is mostly flat, providing additional support for constant variance. Lastly, the 'Residuals vs Leverage' plot helps identify potentially influential observations. Most points exhibit low leverage. While point 144 shows slightly higher leverage than others, its standardized residual does not appear extreme, and no points seem to significantly exceed typical Cook's distance thresholds (though contours are not explicitly labeled). Therefore, based on this visual assessment, the standard OLS assumptions seem adequately satisfied for our interaction model, lending validity to the statistical inferences we have drawn from it.
 
-In the earlier period (Era = 0), both three-point percentage (3P\%) and two-point percentage (2P\%) positively predict win rate. A 1 
-percentage point increase in two-point shooting percentage is associated with a 3.74\% increase in win rate, compared to a 1.88\% increase 
-for three-point shooting. In the modern period (Era = 1), the marginal effect of three-point shooting strengthens by an additional 2.88 
-points ($p < 0.001$), while the effect of two-point shooting decreases by approximately 1.56 points ($p = 0.0415$). 
-
-Notably, the three-point attempt rate remains statistically insignificant across periods, suggesting that merely increasing shot volume 
-without efficiency improvements does not translate into greater success. Additionally, the direct effect of era itself is not significant, 
-indicating that improvements in win rate are mediated primarily through changes in shooting efficiency.
-
-Together, the period-specific models and the interactive model provide consistent and reinforcing evidence of a structural shift in the NBA. 
-In the modern era, three-point efficiency has overtaken two-point efficiency as the more critical determinant of team success, reflecting 
-the league’s broader transition toward a perimeter-oriented ``small ball'' strategy.
-
-
-\subsection{Model Diagnostic}
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.9\textwidth]{figure/diagnostic_plots_mydf_2005_2009.png}
-    \caption{Comparison of Marginal Effects Between Periods.}
-    \label{fig:diagnostic_plots}
-\end{figure}
-For our parsimonious linear regression models, which is actually our first type of model. We conducted standard model diagnostic checks using residual 
-plots. The Residuals vs Fitted plot shows no strong patterns, supporting the linearity assumption. The Q-Q plot indicates that residuals are 
-approximately normally distributed. The Scale-Location plot suggests constant variance of residuals. Finally, the Residuals vs Leverage plot does not 
-show any extreme influential observations. Overall, the diagnostics suggest that our model is appropriate for inference. You can see the diagnostic plots 
-in Figure \ref{fig:diagnostic_plots}, this is the polt for the period 2005-2009. For different periods, the diagnostic plots are similar.
 
 %----------------------------------------------------------------------------------------
-% Conclusion
+% End of Results Section
 %----------------------------------------------------------------------------------------
 
-\section{Conclusion}
-In this project, we investigated how the importance of three-point shooting has evolved in relation to NBA team success. 
-By analyzing team-level data from two distinct eras and fitting both period-specific and interaction models, we found that three-point 
-shooting efficiency has become a significantly stronger predictor of win rate in the modern era. Meanwhile, the influence of two-point 
-shooting has declined, and merely increasing three-point shot volume without efficiency gains does not lead to higher success.
+%----------------------------------------------------------------------------------------
+% Conclusion Section (Revised Word Count: Approx. 350-400 words)
+%----------------------------------------------------------------------------------------
 
-These findings provide quantitative evidence of a structural shift in NBA strategy toward perimeter-oriented offenses. Our results support 
-the widely discussed idea of a "three-point era," highlighting how team success today relies more heavily on shooting efficiency beyond the 
-arc. Future research could further explore player-level adaptations and defensive responses accompanying this evolution.
+\section{Conclusion} % Main Section Title
+
+\subsection{Summary of Findings and Implications} % Sub-section 4.1
+% Word Count: Approx. 180-200 words
+
+This project statistically investigated the perceived emergence of a "Three-Point Era" in the NBA by analyzing how the relationship 
+between shooting efficiency and team success evolved over time. Using data from the 2005–2009 and 2020–2024 NBA regular seasons 
+(source: NBA API), we examined the association between three-point percentage (\texttt{3P\%}) and team win rate (\texttt{WinRate}), 
+controlling for two-point efficiency and shot selection ratios. Our regression results show that while three-point efficiency was 
+not significantly associated with win rate in the earlier period, it became a statistically significant predictor of success in the 
+modern era. The key supporting evidence is the statistically significant interaction term between era and three-point percentage 
+(\texttt{Era:X3P.}) in our model (see Table~\ref{tab:interaction_summary_R}), which indicates that the strength of this association 
+increased by approximately 2.88 units in the 2020–2024 period compared to 2005–2009. This provides compelling quantitative support 
+for the claim that the strategic value of three-point shooting has risen over time. Although our observational design cannot 
+establish causality, the magnitude and significance of the shift strongly align with the notion that efficient three-point 
+shooting has become a more decisive factor in team success under modern league dynamics.
+
+\subsection{Limitations of the Analysis} % Sub-section 4.3
+% Word Count: Approx. 120-150 words
+Several limitations must be considered when interpreting these results. Primarily, as this study relies on observational data, 
+we cannot make definitive causal claims. The observed associations, and the changes in them, could be influenced by numerous 
+unobserved confounding variables that evolved alongside shooting strategies. Potential confounders include changes in defensive 
+rules and strategies over the years, the overall evolution of player skill sets (especially the rise of prolific shooters), 
+influential coaching philosophies adapting to or driving trends, the impact of specific superstar players on their teams' style 
+and success, uncaptured variations in team defense quality, or even factors like player injuries or strength of schedule within 
+specific seasons. While our model controls for key efficiency and shot selection metrics, it cannot account for all such complex, 
+potentially time-varying confounders. Other limitations include the specific choice of time periods for comparison and the inherent 
+assumptions of the linear regression model framework.
+
+\subsection{Future Research} % Sub-section 4.4
+% Word Count: Approx. 30-40 words
+Future research could aim to address these limitations by incorporating data on defensive metrics, coaching changes, or player-level statistics if available. Exploring different time frames or using panel data methods might also provide further insights. Applying more advanced methods aimed at causal inference from observational data could be valuable, though potentially challenging.
+
+%----------------------------------------------------------------------------------------
+% End of Conclusion Section
+%----------------------------------------------------------------------------------------
 %----------------------------------------------------------------------------------------
 % References
 %----------------------------------------------------------------------------------------
