@@ -14,28 +14,24 @@ mydf_2020_2024 <- read.csv("data/5y/2020-2024_NBA_data.csv", header = TRUE, stri
 ```
 
 ```{r}
-head(mydf_2005_2009)
-```
-```{r}
-jpeg("img/3P shooting percent.jpg", width = 3000, height = 1500, res = 300)
-par(mfrow = c(1, 2), mar = c(5, 4, 7, 2))
+jpeg("img/3 point shooting percentage.jpg", width = 3000, height = 1500, res = 300)
+library(ggplot2)
 
-hist(mydf_2005_2009$X3P.,
-     main = "3 Point Shooting Percent in 2005-2009",
-     xlab = "3P%",
-     ylab = "Frequency",
-     col = "lightblue",
-     border = "black")
+# 合并两个数据，加上 era 标签
+df <- rbind(
+  data.frame(X3P = mydf_2005_2009$X3P., Era = "2005–2009"),
+  data.frame(X3P = mydf_2020_2024$X3P., Era = "2020–2024")
+)
 
-hist(mydf_2020_2024$X3P.,
-     main = "3 Point Ahooting Percent in 2020-2024",
-     xlab = "3P%",
-     ylab = "Frequency",
-     col = "lightblue",
-     border = "black")
-
+# ggplot2 画并列 histogram
+ggplot(df, aes(x = X3P, fill = Era)) +
+  geom_histogram(binwidth = 0.01, position = "dodge", color = "black") +
+  labs(x = "3P%", y = "Frequency") +
+  scale_fill_manual(values = c("2005–2009" = "skyblue", "2020–2024" = "salmon")) +
+  theme_minimal()
 dev.off()
 ```
+
 ```{r}
 jpeg("img/3 point attempt rate.jpg", width = 3000, height = 1500, res = 300)
 par(mfrow = c(1, 2))
@@ -53,6 +49,38 @@ hist(mydf_2020_2024$X3P_ratio,
      ylab = "Frequency",
      col = "lightblue",
      border = "black")
+
+dev.off()
+```
+```{r}
+library(dplyr)
+jpeg("img/3 point attempt rate.jpg", width = 3000, height = 1500, res = 300)
+
+# 构造数据框（确保 mean_3p_2005 和 mean_3p_2024 已经提前定义）
+df_pie <- data.frame(
+  Era = rep(c("2005–2009", "2020–2024"), each = 2),
+  ShotType = rep(c("3P", "2P"), times = 2),
+  Value = c(mean_3p_2005, 1 - mean_3p_2005, mean_3p_2024, 1 - mean_3p_2024)
+)
+
+# 计算百分比标签和角度位置
+df_pie <- df_pie %>%
+  group_by(Era) %>%
+  mutate(
+    percent = round(Value * 100, 1),
+    label = paste0(ShotType, ": ", percent, "%"),
+    pos = cumsum(Value) - Value / 2
+  )
+
+# 画图 + 百分比标签
+ggplot(df_pie, aes(x = "", y = Value, fill = ShotType)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y") +
+  facet_wrap(~Era) +
+  geom_text(aes(y = pos, label = label), color = "black", size = 4) +
+  scale_fill_manual(values = c("3P" = "skyblue", "2P" = "orange")) +
+  theme_void() +
+  theme(strip.text = element_text(size = 12))
 
 dev.off()
 ```

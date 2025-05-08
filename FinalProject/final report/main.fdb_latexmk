@@ -1,13 +1,6 @@
 # Fdb version 3
-["bibtex main"] 1746149095 "main.aux" "main.bbl" "main" 1746149096
-  "/usr/local/texlive/2022/texmf-dist/bibtex/bst/harvard/apsr.bst" 1136766823 25357 c990a86d1a60aa9370f76a9507b609ec ""
-  "literature.bib" 1745645592 255 3790af6da05e875daba0c7b5b3a83621 ""
-  "main.aux" 1746149096 5492 f52d5f3adedb1ec060249396e35e817c "pdflatex"
-  (generated)
-  "main.bbl"
-  "main.blg"
-["pdflatex"] 1746149095 "/Users/zhengbowen/nondefault/STAT-333(UW-Madison)/FinalProject/final report/main.tex" "main.pdf" "main" 1746149096
-  "/Users/zhengbowen/nondefault/STAT-333(UW-Madison)/FinalProject/final report/main.tex" 1746149093 35876 85bf58d658ad97030368b7ef961f5946 ""
+["pdflatex"] 1746662343 "/Users/zhengbowen/nondefault/STAT-333(UW-Madison)/FinalProject/final report/main.tex" "main.pdf" "main" 1746662344
+  "/Users/zhengbowen/nondefault/STAT-333(UW-Madison)/FinalProject/final report/main.tex" 1746662343 39437 3a31277a5f6dfba5d20c7a0874e59e9e ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/xcharter/xch1_co4ru4.enc" 1645915288 4020 60b792d80020bd18b20705eb9657af3d ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/xcharter/xch_rydp4l.enc" 1645915288 3163 21e525d33df21a14ca1957bee2a40288 ""
@@ -31,6 +24,7 @@
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmmi9.tfm" 1136768653 1524 d89e2d087a9828407a196f428428ef4a ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmr10.tfm" 1136768653 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1136768653 1288 655e228510b4c2a1abe905c368440826 ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmr17.tfm" 1136768653 1292 296a67155bdbfc32aa9c636f21e91433 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmr6.tfm" 1136768653 1300 b62933e007d01cfd073f79b963c01526 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmr8.tfm" 1136768653 1292 21c1c5bfeaebccffdb478fd231a0997d ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmr9.tfm" 1136768653 1292 6b21b9c2c7bebb38aa2273f7ca0fb3af ""
@@ -47,6 +41,7 @@
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/xcharter/XCharter1-Roman-ts1--base.tfm" 1645915288 1524 e88e985840aae645568dcf70e1f711ba ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/xcharter/XCharter1-Roman-ts1.tfm" 1645915288 1552 98696c2cd23c445b5368a400e0dc81a9 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1248133631 35469 70d41d2b9ea31d5d813066df7c99281c ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
@@ -238,13 +233,13 @@
   "figure/3 point shooting percentage.jpg" 1746061674 217942 a91cd3c76218c6e05cbf0b9f7bbc5954 ""
   "figure/Coefficients Over Time by Variable.jpg" 1745801439 214005 0dd2607f474353843c59529c828de42c ""
   "figure/P-value Trends Over Time.jpg" 1745801439 310356 c0cc360858b232de12a1d7a94e6efb41 ""
+  "figure/confounder_model_appendix.png" 1746661157 219779 577316239ab2a4fe4c4933e55baeaa4b ""
   "figure/diagnostic_plots_mydf_2005_2009.png" 1745802515 365860 d913076c6c5432082d9423ff00dec907 ""
   "figure/model0_2005_2009.png" 1745796497 48742 ed4fb86de11091e7b6705ff4d4d59158 ""
   "figure/model0_2020_2024.png" 1745796521 48376 22af27d96423cefa23ba82b3397e634d ""
-  "main.aux" 1746149096 5492 f52d5f3adedb1ec060249396e35e817c "pdflatex"
-  "main.bbl" 1746149095 51 644c51d86f43488906f29305195f1859 "bibtex main"
-  "main.out" 1746149096 2606 a2fa338480d07866353e9bec7978af41 "pdflatex"
-  "main.tex" 1746149093 35876 85bf58d658ad97030368b7ef961f5946 ""
+  "main.aux" 1746662344 6238 71b2e924c54be56ec0e7c88f0f430505 "pdflatex"
+  "main.out" 1746662344 2810 dfa328e24befe8f527644f163c78b8af "pdflatex"
+  "main.tex" 1746662343 39437 3a31277a5f6dfba5d20c7a0874e59e9e ""
   (generated)
   "main.aux"
   "main.log"

@@ -103,7 +103,7 @@
 %---------------------------------------------------------------------------------
 %	General information
 %---------------------------------------------------------------------------------
-\title{title} % Adds your title
+\title{title \thanks{The whole project is published in this \href{https://github.com/S-tanley/STAT-333-UW-Madison}{repo}}} % Adds your title
 \author{
 Stanley Zheng \space Eric \space Lucas
 % Add your first and last name
@@ -266,6 +266,10 @@ stronger in recent years, rather than relying solely on visual or descriptive co
 % be correlated with shooting performance, thus serving as potential confounders. Including them in the model allows us to assess 
 % whether the effect of three-point shooting remains significant after accounting for other team performance metrics.
 
+To investigate the influence of potential confounding variables, we expanded our interactive model by incorporating a range of 
+other team statistics that could plausibly affect win rates. These included measures such as free throw percentage 
+(\texttt{FT\_PCT}), offensive and defensive rebounds (\texttt{OREB}, \texttt{DREB}).
+
 To evaluate the validity of our regression models, we also performed standard diagnostic checks. Specifically, we examined 
 residual plots including Residuals vs Fitted, Normal Q-Q, Scale-Location, and Residuals vs Leverage. These plots allow us to 
 assess key assumptions of linear regression such as linearity, homoscedasticity, normality of residuals, and the presence of 
@@ -411,6 +415,32 @@ associations in this model. The overall model provides a reasonable fit (Adjuste
 highly significant overall (F-statistic p-value < 2.2e-16). The strong significance of the \texttt{X3P.:Era} interaction 
 provides the formal statistical validation for our thesis about the changing relationship.
 
+\subsection{Consideration of Confounders}
+In our primary analysis, we aim to understand the statistical association between three-point shooting --- particularly 
+three-point percentage (\texttt{3P\%}) --- and team win rates (\texttt{WinRate}). However, various other aspects of team 
+performance might be associated with both a team's reliance on three-point shooting and its overall success, potentially 
+confounding the observed relationship between our primary variables. Understanding and accounting for these potential confounders 
+is important for interpreting the association more clearly.
+
+To address this, we considered including a range of basketball performance metrics as control variables (potential confounders) 
+in our modeling. These included metrics related to other aspects of scoring efficiency, ball control, and defense, such as free 
+throw percentage (\texttt{FT\_PCT}), offensive and defensive rebounds (\texttt{OREB}, \texttt{DREB}), turnovers (\texttt{TOV}), 
+steals (\texttt{STL}), blocks (\texttt{BLK}), and fouls committed or drawn (\texttt{PF}, \texttt{PFD}).
+
+These variables were considered because they represent critical facets of overall team performance beyond just shooting percentages. 
+It is plausible that these factors correlate with both shooting behavior and win rates. For example, teams that secure more 
+defensive rebounds (\texttt{DREB}) or generate more steals (\texttt{STL}) might create more fast-break or transition opportunities, 
+potentially leading to different types or qualities of three-point attempts. Similarly, teams committing fewer 
+turnovers (\texttt{TOV}) or drawing more fouls (\texttt{PFD}) might represent more disciplined or skilled teams overall, 
+which could correlate independently with both higher win rates and specific offensive strategies (including three-point efficiency).
+
+By including such variables in the regression model(see Appendix Figure \ref{fig:confounder_model_appendix} for details), the goal is to statistically adjust for their association with both the 
+predictors and the outcome. This approach helps to isolate the independent statistical association of the primary shooting 
+metrics (\texttt{3P\%}, \texttt{2P\%}, etc.) with team success (\texttt{WinRate}), allowing for a more nuanced interpretation 
+of the relationship after accounting for these other performance dimensions. (As noted in the Results section, key findings 
+regarding \texttt{3P\%} remained significant after including controls in exploratory models).
+
+
 \subsection{Model Diagnostics}
 \begin{figure}[htbp] 
     \centering
@@ -472,12 +502,12 @@ Future research could aim to address these limitations by incorporating data on 
 % References
 %----------------------------------------------------------------------------------------
 
-\newpage % Includes a new page
-\pagenumbering{roman} % Changes page numbering to roman page numbers
-%\bibliography{literature}
+% \newpage % Includes a new page
+% \pagenumbering{roman} % Changes page numbering to roman page numbers
+% %\bibliography{literature}
 
-\bibliography{literature.bib} % Add the filename of your bibliography
-\bibliographystyle{apsr} % Defines your bibliography style
+% \bibliography{literature.bib} % Add the filename of your bibliography
+% \bibliographystyle{apsr} % Defines your bibliography style
 
 %----------------------------------------------------------------------------------------
 % Appendix
@@ -488,6 +518,13 @@ Future research could aim to address these limitations by incorporating data on 
 
 \section*{Appendix}
 
+\begin{figure}[htbp] % Figure environment to place the image
+    \centering % Center the image
+    % Make sure the path 'figure/image_eaa7f2.png' is correct relative to your .tex file
+    \includegraphics[width=0.8\textwidth]{figure/confounder_model_appendix.png} 
+    \caption{Example Regression Model Output Including Confounding Variables (Data: 2020-2024 Period). This model includes variables such as $FT_PCT$, OREB, DREB, TOV, STL, BLK, PF, PFD etc., in addition to the primary shooting metrics.}
+    \label{fig:confounder_model_appendix} % Label for referencing this figure
+\end{figure}
 % For citing, please see this sheet: http://merkel.texture.rocks/Latex/natbib.php
 
 % %----------------------------------------------------------------------------------------
